@@ -1,0 +1,89 @@
+{
+    "workbench.colorTheme": "Ayu Dark Bordered",
+    "editor.fontFamily": " Inconsolata, Fantasque Sans Mono, Monaco, 'Courier New', monospace",
+    "window.zoomLevel": 1,
+    "terminal.external.osxExec": "iTerm-nightly.app",
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "workbench.sideBar.location": "left",
+    "workbench.editor.showTabs": false,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.leader": ",",
+    "workbench.iconTheme": "material-icon-theme",
+    "vim.normalModeKeyBindingsNonRecursive":[
+        {
+            "before":["<leader>", "f"],
+            "commands":[
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before":["<leader>", "w"],
+            "commands":[
+                "workbench.action.files.save"
+            ]
+        },
+        {
+            "before":["<C-l>"],
+            "commands":[
+                {
+                    "command":":nohl",
+                }
+            ]
+        },
+        {
+            "before":["z", "m"],
+            "commands":[
+                {
+                    "command":"editor.fold"
+                }
+            ]
+        },
+        {
+            "before":["z", "a"],
+            "commands":[
+                {
+                    "command": "editor.unfold"
+                }
+            ]
+        }
+    ],
+    "vim.foldfix": true,
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": false,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.wordWrap": "on",
+    "scm.diffDecorations": "gutter",
+    "editor.cursorStyle": "line-thin",
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "workbench.colorCustomizations": {
+        "editorOverviewRuler.findMatchForeground": "#ff000000",
+        "editorOverviewRuler.rangeHighlightForeground": "#ff000000",
+        "editorOverviewRuler.wordHighlightForeground": "#ff000000",
+        "editorOverviewRuler.selectionHighlightForeground": "#ff000000"
+    },
+    "workbench.editor.tabSizing": "shrink",
+    "editor.fontLigatures": true,
+    "files.trimTrailingWhitespace": true,
+    "[go]":{
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4
+    },
+    "[ruby]":{
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "ruby.linter.run": "onSave"
+    },
+    "vscode_custom_css.imports": ["file:///Users/eq/.vscode/custom.css"],
+    "vscode_custom_css.policy": true,
+    "window.title": "${activeEditorShort}",
+}
