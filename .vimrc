@@ -1,7 +1,10 @@
 set encoding=utf-8
 
+let mapleader = ","               " set leader key to comma
+
 syntax on                         " show syntax highlighting
 filetype plugin indent on
+set hidden
 set tags=./.tags;,tags;
 set autowrite
 set backspace=indent,eol,start
@@ -41,7 +44,6 @@ syntax sync minlines=256
 autocmd Colorscheme * highlight FoldColumn guifg=bg guibg=bg
 let NERDTreeMinimalUI = 1
 
-let mapleader = ","                             " set leader key to comma
 "ale  Error and warning signs.
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
@@ -52,7 +54,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='ayu'
+let g:airline_theme='minimalist'
 let g:ackprg = 'rg --vimgrep'
 
 "vim markdown
@@ -73,7 +75,7 @@ highlight GitGutterChangeDelete guifg = '#A3E28B'
 " ale linter
 let g:ale_linters = {
 \  'ruby': ['rubocop'],
-\  'go': ['vet'],
+\  'go': ['errcheck'],
 \}
 let g:ale_go_gometalinter_options="--fast"
 let g:ale_lint_delay = 1000
@@ -98,13 +100,13 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+""let g:go_guru_scope=['...']
+let g:go_def_mode= 'godef'
 "
-"let g:go_def_mode = ''
 let g:go_auto_type_info = 1
-"let g:go_auto_sameids = 1
+let g:go_auto_sameids = 1
 
 noremap <leader>T :GoCoverageToggle<cr>
-noremap <leader>D :GoDef<cr>
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=8 shiftwidth=8
 au FileType go nmap <leader>g :GoDeclsDir<cr>
 
@@ -128,7 +130,7 @@ nmap <silent> <C-j> <Plug>(ale_next)
 " Map space " unmap ex mode: 'Type visual to go into Normal mode.'
 nnoremap Q <nop>
 " fast saving
-map <leader>w :w!<cr>
+map <Leader>w :w!<cr>
 " ack to current cursor
 noremap <Leader>a :Ack <cword><cr>
 " map . in visual mode
@@ -191,18 +193,19 @@ endif
 "nvim specific command
 if has("nvim")
   " nvim deoplete-go configuration
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-  let g:deoplete#sources#go#package_dot = 1
-  let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+  "let g:deoplete#enable_at_startup = 1
+  "let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+  "let g:deoplete#sources#go#package_dot = 1
+  "let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
   " neocomplete like
   set completeopt+=noinsert
   " deoplete.nvim recommend
   set completeopt+=noselect
   " use tab to forward cycle
-  inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+  "inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
   "exit terminal with nvim
   tnoremap <Esc> <C-\><C-n>
+
 endif
 
 " run GoLint on save
@@ -227,6 +230,10 @@ function! JSONPrettify()
   exec ':%!python3 -m json.tool'
 endfunction
 
+function! CheckError()
+  exec ':Denite coc-diagnostic'
+endfunction
+
 " custom fzf status line color
 function! s:fzf_statusline()
   " Override statusline as you like
@@ -238,6 +245,7 @@ endfunction
 
 " custom focus mode
 let s:focus_mode = 0
+
 function! ToggleFocusMode()
   if s:focus_mode == 0
     exec 'AirlineToggle'
@@ -257,4 +265,24 @@ function! ToggleFocusMode()
   endif
 endfunction
 
-nnoremap <leader>H :call ToggleFocusMode()<cr>
+" CoC vim
+" use <tab> for trigger completion and navigate next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" use <C-space> for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+noremap <leader>h :Goyo <cr>
+noremap <leader>H :Goyo 200 <cr>
+
