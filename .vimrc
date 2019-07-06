@@ -75,40 +75,13 @@ highlight GitGutterChangeDelete guifg = '#A3E28B'
 " ale linter
 let g:ale_linters = {
 \  'ruby': ['rubocop'],
-\  'go': ['errcheck'],
+\  'go': ['govet','errcheck'],
 \}
 let g:ale_go_gometalinter_options="--fast"
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_enter = 0
 
-" swap supertab completion
-let g:SuperTabDefaultCompletionType = "<c-n>"
 " vim-go specific command
-let g:go_addtags_transform = "snakecase"
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "goimports"
-"let g:go_metalinter_enabled = ['vet', 'deadcode', 'errcheck']
-"let g:go_metalinter_autosave = 1
-"let g:go_metalinter_autosave_enabled = ['vet']
-let g:go_metalinter_deadline = "3s"
-" highlight all
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-""let g:go_guru_scope=['...']
-let g:go_def_mode= 'godef'
-"
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
-
-noremap <leader>T :GoCoverageToggle<cr>
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=8 shiftwidth=8
-au FileType go nmap <leader>g :GoDeclsDir<cr>
 
 " fzf plugin related action
 if executable("fzf")
@@ -136,8 +109,8 @@ noremap <Leader>a :Ack <cword><cr>
 " map . in visual mode
 vnoremap . :norm.<cr>
 " map git commands
-map <leader>l :!clear && git log -p %<cr>
-map <leader>d :!clear && git diff %<cr>
+map <leader>l :Lines<cr>
+"map <leader>d :!clear && git diff %<cr>
 " set fold to space
 nnoremap <space> za
 vnoremap <space> za
@@ -192,11 +165,6 @@ endif
 
 "nvim specific command
 if has("nvim")
-  " nvim deoplete-go configuration
-  "let g:deoplete#enable_at_startup = 1
-  "let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-  "let g:deoplete#sources#go#package_dot = 1
-  "let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
   " neocomplete like
   set completeopt+=noinsert
   " deoplete.nvim recommend
@@ -205,11 +173,8 @@ if has("nvim")
   "inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
   "exit terminal with nvim
   tnoremap <Esc> <C-\><C-n>
-
 endif
 
-" run GoLint on save
-"autocmd BufWritePre *.go call go#lint#Golint()
 " check white space on save
 autocmd BufWritePre * %s/\s\+$//e
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
@@ -285,4 +250,20 @@ inoremap <silent><expr> <c-space> coc#refresh()
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 noremap <leader>h :Goyo <cr>
 noremap <leader>H :Goyo 200 <cr>
-
+" Nerdtree settings
+let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
+let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
+let g:fzf_colors = {
+    \ 'fg':      ['fg', 'GruvboxGray'],
+    \ 'bg':      ['bg', 'Normal'],
+    \ 'hl':      ['fg', 'GruvboxRed'],
+    \ 'fg+':     ['fg', 'GruvboxGreen'],
+    \ 'bg+':     ['bg', 'GruvboxBg1'],
+    \ 'hl+':     ['fg', 'GruvboxRed'],
+    \ 'info':    ['fg', 'GruvboxOrange'],
+    \ 'prompt':  ['fg', 'GruvboxBlue'],
+    \ 'header':  ['fg', 'GruvboxBlue'],
+    \ 'pointer': ['fg', 'Error'],
+    \ 'marker':  ['fg', 'Error'],
+    \ 'spinner': ['fg', 'Statement'],
+    \ }

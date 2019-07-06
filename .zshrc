@@ -5,6 +5,8 @@ export GOPATH="/Users/eq/Documents/go"
 export PATH="/usr/local/sbin:$PATH:$GOPATH/bin"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/lib/python3.7/site-packages:$PATH"
+# maven path
+export PATH="$PATH:/usr/local/opt/apache-maven/bin"
 #export PATH="/Users/eq/Library/Python/3.7/bin:$PATH"
 #export PATH="$HOME/.cargo/bin:$PATH"
 

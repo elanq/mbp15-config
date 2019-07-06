@@ -11,16 +11,16 @@ Plug 'mileszs/ack.vim'
 Plug 'sebdah/vim-delve'
 Plug 'junegunn/fzf.vim'
 "Plug 'yuttie/hydrangea-vim'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/denite.nvim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/goyo.vim'
 Plug 'fatih/vim-go'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'jodosha/vim-godebug'
 "Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -30,9 +30,12 @@ call plug#end()
 
 set termguicolors
 let ayucolor="dark"
-colorscheme ayu
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc
+source ~/.config/nvim/golang.vim
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
