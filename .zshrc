@@ -155,7 +155,19 @@ c() {
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
-
+wordfrequency() {
+  awk '
+     BEGIN { FS="[^a-zA-Z]+" } {
+         for (i=1; i<=NF; i++) {
+             word = tolower($i)
+             words[word]++
+         }
+     }
+     END {
+         for (w in words)
+              printf("%3d %s\n", words[w], w)
+     } ' | sort -rn
+}
 ### fzh Function
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)

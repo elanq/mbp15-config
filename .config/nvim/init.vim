@@ -21,6 +21,7 @@ Plug 'fatih/vim-go'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'morhetz/gruvbox'
+"Plug 'majutsushi/tagbar'
 "Plug 'jodosha/vim-godebug'
 "Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }

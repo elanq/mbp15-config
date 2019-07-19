@@ -105,7 +105,7 @@ nnoremap Q <nop>
 " fast saving
 map <Leader>w :w!<cr>
 " ack to current cursor
-noremap <Leader>a :Ack <cword><cr>
+noremap <silent> <Leader>a :Rg <C-R><C-W><cr>
 " map . in visual mode
 vnoremap . :norm.<cr>
 " map git commands
@@ -196,7 +196,8 @@ function! JSONPrettify()
 endfunction
 
 function! CheckError()
-  exec ':Denite coc-diagnostic'
+  "exec ':Denite coc-diagnostic'
+  exec 'CocList diagnostics'
 endfunction
 
 " custom fzf status line color
@@ -250,6 +251,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 noremap <leader>h :Goyo <cr>
 noremap <leader>H :Goyo 200 <cr>
+noremap <leader>E :call CheckError() <cr>
 " Nerdtree settings
 let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
 let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
